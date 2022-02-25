@@ -19,6 +19,7 @@ const App: React.FC = () => {
   const [catFact, setCatFact] = React.useState("");
   const [catImg, setCatImg] = React.useState("");
 
+  // Refresh to get Data
   React.useEffect(() => {
     axios.get("https://catfact.ninja/fact").then((res) => {
       setCatFact(res.data.fact);
