@@ -1,17 +1,40 @@
 import React from "react";
-import { Box, BoxProps } from "@mui/material";
+import { Stack, StackProps, Typography } from "@mui/material";
+import axios from "axios";
 
-const StyledBox = ({ children, ...restProps }: BoxProps) => (
-  <Box sx={{ background: "red" }} {...restProps}>
+const StyledStack = ({ children, ...restProps }: StackProps) => (
+  <Stack
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+    {...restProps}
+  >
     {children}
-  </Box>
+  </Stack>
 );
 
 const App: React.FC = () => {
+  const [catFact, setCatFact] = React.useState("");
+  const [catImg, setCatImg] = React.useState("");
+
+  React.useEffect(() => {
+    axios.get("https://catfact.ninja/fact").then((res) => {
+      setCatFact(res.data.fact);
+    });
+  }, []);
+  React.useEffect(() => {
+    axios.get("https://api.thecatapi.com/v1/images/search").then((res) => {
+      setCatImg(res.data[0].url);
+    });
+  }, []);
+
   const component = (
-    <StyledBox sx={{ border: "1px solid black", width: 100, heigh: 100 }}>
-      Hello ues
-    </StyledBox>
+    <StyledStack>
+      <Typography variant="h5">{catFact}</Typography>
+      <img src={catImg} alt="catImg" />
+    </StyledStack>
   );
   return component;
 };
