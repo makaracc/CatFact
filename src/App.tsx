@@ -32,8 +32,10 @@ const App: React.FC = () => {
 
   const component = (
     <StyledStack>
-      <Typography variant="h5">{catFact}</Typography>
-      <img src={catImg} alt="catImg" />
+      <Typography sx={{ width: "80%", m: "1em" }} variant="h5">
+        {catFact}
+      </Typography>
+      <img src={catImg} alt="catImg" width="80%" />
     </StyledStack>
   );
   return component;
