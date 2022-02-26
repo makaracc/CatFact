@@ -1,13 +1,26 @@
 import React from "react";
-import { Stack, StackProps, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  StackProps,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
+import dog from "./dog";
 
-const StyledStack = ({ children, ...restProps }: StackProps) => (
+const StyledStack = ({ sx, children, ...restProps }: StackProps) => (
   <Stack
     sx={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      ...sx,
     }}
     {...restProps}
   >
@@ -15,8 +28,20 @@ const StyledStack = ({ children, ...restProps }: StackProps) => (
   </Stack>
 );
 
+const pets = [
+  "Cat",
+  "Dog",
+  "Fish",
+  "Bird",
+  "Rabbit",
+  "Hamster",
+  "Guinea Pig",
+  "Other",
+];
+
 const App: React.FC = () => {
   const [catFact, setCatFact] = React.useState("");
+  const [pet, setPet] = React.useState(pets[0]);
   const [catImg, setCatImg] = React.useState("");
 
   // Refresh to get Data
@@ -31,8 +56,29 @@ const App: React.FC = () => {
     });
   }, []);
 
+  const handlePetChange = (event: SelectChangeEvent) => {
+    setPet(event.target.value as string);
+  };
+
   const component = (
     <StyledStack>
+      <StyledStack direction="row" gap={3} width="50%">
+        <FormControl sx={{ width: "max(30%, 6.5em)" }}>
+          <InputLabel id="pet-select-label">Pet</InputLabel>
+          <Select
+            labelId="pet-select-label"
+            id="pet-select"
+            value={pet}
+            label="Pet"
+            onChange={handlePetChange}
+          >
+            {pets.map((p) => (
+              <MenuItem value={p}>{p}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Button variant="contained">Next Fact</Button>
+      </StyledStack>
       <Typography sx={{ width: "80%", m: "1em" }} variant="h5">
         {catFact}
       </Typography>
