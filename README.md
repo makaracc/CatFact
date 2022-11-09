@@ -1,3 +1,3 @@
 # CatFact
 
-[Link to code Running](https://cute-pic-cat-fact.netlify.app/)
+[Link to code Running](https://pet-fact.netlify.app)
