@@ -109,7 +109,7 @@ const App: React.FC = () => {
       <Typography sx={{ width: "80%", m: "1em" }} variant="h5">
         {petFact}
       </Typography>
-      <img src={petImg} alt="catImg" width="80%" />
+      <img src={petImg} alt="catImg" width="80%" loading="lazy" />
     </StyledStack>
   );
   return component;
